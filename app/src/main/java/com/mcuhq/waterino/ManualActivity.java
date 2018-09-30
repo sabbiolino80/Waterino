@@ -58,7 +58,7 @@ public class ManualActivity extends MyBaseActivity {
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 10, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 10, 0, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -75,7 +75,7 @@ public class ManualActivity extends MyBaseActivity {
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 11, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 11, 0, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -92,7 +92,7 @@ public class ManualActivity extends MyBaseActivity {
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 12, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 12, 0, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -109,7 +109,7 @@ public class ManualActivity extends MyBaseActivity {
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 13, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 13, 0, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
