@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreenDark"
+    android:background="@color/colorLightGrey"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,6 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <LinearLayout
@@ -35,6 +36,7 @@
                 android:scaleX="1.7"
                 android:scaleY="1.7"
                 android:text="Toggle LED"
+                android:textColorLink="@color/colorPrimary"
                 android:textStyle="bold" />
 
             <ImageButton
@@ -44,8 +46,10 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="0dp"
                 android:adjustViewBounds="false"
+                android:background="@color/colorWhite"
+                android:clickable="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/hand" />
+                android:src="@drawable/ic_gamepad" />
         </LinearLayout>
 
         <LinearLayout

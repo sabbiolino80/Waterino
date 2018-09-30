@@ -4,29 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreenDark"
+    android:background="@color/colorLightGrey"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/checkboxVALVE"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
             android:checked="false"
             android:gravity="center"
             android:scaleX="1.7"
             android:scaleY="1.7"
             android:text="Toggle VALVE"
+            android:textColorLink="@color/colorPrimary"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal">
 
         <TableLayout
@@ -42,9 +47,11 @@
                     android:id="@+id/imageButtonUp"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:background="@color/colorWhite"
+                    android:clickable="true"
                     android:contentDescription="TODO"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/up" />
+                    android:src="@drawable/ic_keyboard_arrow_up" />
 
             </TableRow>
 
@@ -57,10 +64,11 @@
                     android:id="@+id/imageButtonLeft"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:background="@color/colorWhite"
+                    android:clickable="true"
                     android:contentDescription="TODO"
-                    android:rotation="270"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/up" />
+                    android:src="@drawable/ic_keyboard_arrow_left" />
 
                 <ImageButton
                     android:id="@+id/imageButtonStop"
@@ -70,20 +78,22 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@color/colorWhite"
+                    android:clickable="true"
                     android:contentDescription="TODO"
                     android:padding="8dp"
                     android:rotation="270"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/stop2" />
+                    android:src="@drawable/ic_stop" />
 
                 <ImageButton
                     android:id="@+id/imageButtonRight"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:background="@color/colorWhite"
+                    android:clickable="true"
                     android:contentDescription="TODO"
-                    android:rotation="90"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/up" />
+                    android:src="@drawable/ic_keyboard_arrow_right" />
             </TableRow>
 
             <TableRow
@@ -96,10 +106,11 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:adjustViewBounds="false"
+                    android:background="@color/colorWhite"
+                    android:clickable="true"
                     android:contentDescription="TODO"
-                    android:rotation="180"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/up" />
+                    android:src="@drawable/ic_keyboard_arrow_down" />
             </TableRow>
 
         </TableLayout>
@@ -129,9 +140,11 @@
                 android:id="@+id/imageButtonHome2"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:background="@color/colorWhite"
+                android:clickable="true"
                 android:contentDescription="TODO"
                 android:scaleType="fitCenter"
-                android:src="@drawable/home" />
+                android:src="@drawable/ic_home" />
         </LinearLayout>
     </LinearLayout>
 
@@ -148,10 +161,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/colorWhite"
+            android:clickable="true"
             android:contentDescription="TODO"
             android:padding="5dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/settings" />
+            android:src="@drawable/ic_settings" />
     </LinearLayout>
 
 </LinearLayout>

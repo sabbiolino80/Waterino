@@ -47,22 +47,6 @@ public class ManualActivity extends MyBaseActivity {
             }
         });
 
-        mUpBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
-                        return true; // if you want to handle the touch event
-                    case MotionEvent.ACTION_UP:
-                        // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
-                        return true; // if you want to handle the touch event
-                }
-                return false;
-            }
-        });
 
         mUpBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -70,11 +54,11 @@ public class ManualActivity extends MyBaseActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 10, 1, 3});
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 10, 1, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -87,11 +71,11 @@ public class ManualActivity extends MyBaseActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 11, 1, 3});
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 11, 1, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -104,11 +88,11 @@ public class ManualActivity extends MyBaseActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 12, 1, 3});
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 12, 1, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -121,11 +105,11 @@ public class ManualActivity extends MyBaseActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 13, 1, 3});
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
                         // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 13, 1, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
@@ -138,11 +122,7 @@ public class ManualActivity extends MyBaseActivity {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // PRESSED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
-                        return true; // if you want to handle the touch event
-                    case MotionEvent.ACTION_UP:
-                        // RELEASED
-                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 2, 14, 1, 3});
+                        mMyApp.mConnectedThread.writeBytes(new byte[]{2, 1, 15, 1, 3});
                         return true; // if you want to handle the touch event
                 }
                 return false;
