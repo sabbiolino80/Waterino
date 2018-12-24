@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/buttonHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="HOME" />
+
+            <Button
+                android:id="@+id/buttonPreset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PRESET" />
+
+            <Button
+                android:id="@+id/buttonResetAl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RESET ALARMS" />
+
+            <Button
+                android:id="@+id/buttonGetStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GET STATUS" />
+
+            <Button
+                android:id="@+id/buttonGetParams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GET PARAMS" />
+
+            <Button
+                android:id="@+id/buttonGoTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GOTO" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="X:" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/buttonMain"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorWhite"
+        android:clickable="true"
+        android:contentDescription="TODO"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_settings" />
+
+</LinearLayout>

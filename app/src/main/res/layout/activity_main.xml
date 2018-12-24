@@ -40,6 +40,14 @@
                 android:textStyle="bold" />
 
             <ImageButton
+                android:id="@+id/buttonGcodes"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/hand" />
+
+            <ImageButton
                 android:id="@+id/imageButtonHand"
                 android:layout_width="100dp"
                 android:layout_height="100dp"

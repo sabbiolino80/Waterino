@@ -36,6 +36,7 @@ public class MainActivity extends MyBaseActivity {
     private ListView mDevicesListView;
     private CheckBox mLED1;
     private ImageButton mHandBtn;
+    private ImageButton mGcodesBtn;
 
 //    private Handler mHandler; // Our main handler that will receive callback notifications
 //    private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
@@ -64,6 +65,7 @@ public class MainActivity extends MyBaseActivity {
         mListPairedDevicesBtn = (Button) findViewById(R.id.PairedBtn);
         mLED1 = (CheckBox) findViewById(R.id.checkboxLED1);
         mHandBtn = (ImageButton) findViewById(R.id.imageButtonHand);
+        mGcodesBtn = (ImageButton) findViewById(R.id.buttonGcodes);
 
         mBTArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         //mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
@@ -118,6 +120,17 @@ public class MainActivity extends MyBaseActivity {
                 public void onClick(View v) {
                     if (mMyApp.mConnectedThread != null) {
                         Intent intent = new Intent(getApplicationContext(), ManualActivity.class);
+                        startActivity(intent);
+                    }
+
+                }
+            });
+
+            mGcodesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mMyApp.mConnectedThread != null) {
+                        Intent intent = new Intent(getApplicationContext(), GCodesActivity.class);
                         startActivity(intent);
                     }
 
