@@ -40,4 +40,15 @@ public class MyBaseActivity extends Activity {
         return mMyApp.getCurrentActivity();
     }
 
+
+    public void SetBTMessage(String text)
+    {
+
+    }
+
+    public void SetBTStatus(String text)
+    {
+
+    }
+
 }

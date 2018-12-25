@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 public class MyApp extends Application {
@@ -25,6 +26,8 @@ public class MyApp extends Application {
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
     private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
 
+    public String mBTMessage, mBTStatus;
+
 
     public void onCreate() {
         super.onCreate();
@@ -32,7 +35,7 @@ public class MyApp extends Application {
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
-        /*mHandler = new Handler() {
+        mHandler = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == MESSAGE_READ) {
                     String readMessage = null;
@@ -41,27 +44,37 @@ public class MyApp extends Application {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mReadBuffer.setText(readMessage);
+                    mBTMessage = readMessage;
+                    if(mCurrentActivity != null)
+                        mCurrentActivity.SetBTMessage(mBTMessage);
                 }
 
                 if (msg.what == CONNECTING_STATUS) {
                     if (msg.arg1 == 1)
-                        mBluetoothStatus.setText("Connected to Device: " + (String) (msg.obj));
+                    {
+                        mBTStatus = "Connected to Device: " + (String) (msg.obj);
+                        if(mCurrentActivity != null)
+                            mCurrentActivity.SetBTStatus(mBTStatus);
+                    }
                     else
-                        mBluetoothStatus.setText("Connection Failed");
+                    {
+                        mBTStatus = "Connection Failed";
+                        if(mCurrentActivity != null)
+                            mCurrentActivity.SetBTStatus(mBTStatus);
+                    }
                 }
             }
-        };*/
+        };
 
     }
 
-    private Activity mCurrentActivity = null;
+    private MyBaseActivity mCurrentActivity = null;
 
-    public Activity getCurrentActivity() {
+    public MyBaseActivity getCurrentActivity() {
         return mCurrentActivity;
     }
 
-    public void setCurrentActivity(Activity mCurrentActivity) {
+    public void setCurrentActivity(MyBaseActivity mCurrentActivity) {
         this.mCurrentActivity = mCurrentActivity;
     }
 

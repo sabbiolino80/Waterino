@@ -47,8 +47,8 @@ public class MainActivity extends MyBaseActivity {
 
     // #defines for identifying shared types between calling functions
     private final static int REQUEST_ENABLE_BT = 1; // used to identify adding bluetooth names
-    private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
-    private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
+    //private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
+    //private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
 
 
     @Override
@@ -75,7 +75,7 @@ public class MainActivity extends MyBaseActivity {
         mDevicesListView.setOnItemClickListener(mDeviceClickListener);
 
 
-        mMyApp.mHandler = new Handler() {
+        /*mMyApp.mHandler = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 if (msg.what == MESSAGE_READ) {
                     String readMessage = null;
@@ -94,7 +94,7 @@ public class MainActivity extends MyBaseActivity {
                         mBluetoothStatus.setText("Connection Failed");
                 }
             }
-        };
+        };*/
 
         if (mBTArrayAdapter == null) {
             // Device does not support Bluetooth
@@ -166,6 +166,18 @@ public class MainActivity extends MyBaseActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void SetBTMessage(String text)
+    {
+        mReadBuffer.setText(text);
+    }
+
+    @Override
+    public void SetBTStatus(String text)
+    {
+        mBluetoothStatus.setText(text);
     }
 
     private void bluetoothOn(View view) {
