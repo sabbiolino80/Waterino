@@ -24,21 +24,6 @@
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/checkboxLED1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/bluetoothStatus"
-                android:layout_alignLeft="@+id/bluetoothStatus"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:checked="false"
-                android:scaleX="1.7"
-                android:scaleY="1.7"
-                android:text="Toggle LED"
-                android:textColorLink="@color/colorPrimary"
-                android:textStyle="bold" />
-
             <ImageButton
                 android:id="@+id/buttonGcodes"
                 android:layout_width="100dp"
@@ -48,11 +33,18 @@
                 android:src="@drawable/hand" />
 
             <ImageButton
+                android:id="@+id/buttonProgram"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_format_list_bulleted" />
+
+            <ImageButton
                 android:id="@+id/imageButtonHand"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="0dp"
                 android:adjustViewBounds="false"
                 android:background="@color/colorWhite"
                 android:clickable="true"

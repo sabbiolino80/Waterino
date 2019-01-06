@@ -35,6 +35,13 @@
                 <category android:name="com.mcuhq.waterino.GCodesActivity" />
             </intent-filter>
         </activity>
+        <activity android:name="com.mcuhq.waterino.ProgramEditorActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+                <category android:name="com.mcuhq.waterino.ProgramEditorActivity" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
