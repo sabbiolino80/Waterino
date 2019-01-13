@@ -11,13 +11,13 @@ import android.widget.TextView;
 
 public class ProgramEditorActivity extends MyBaseActivity {
 
-    private ImageButton mMainBtn, mAddBtn, mRemoveBtn, mMoveUpBtn, mMoveDownBtn, mReferenceBtn, mPowerBtn, mValveBtn, mCopyBtn;
+    private ImageButton mMainBtn, mAddBtn, mRemoveBtn, mMoveUpBtn, mMoveDownBtn, mCopyBtn;
+    private ImageButton mReferenceBtn, mPowerBtn, mValveBtn, mValveOffBtn, mGotoBtn;
     private NumberPicker mXNum, mYNum, mFNum;
     private TextView mXVal, mYVal, mFVal, mCurrentRow;
     private TextView mBluetoothStatus, mReadBuffer;
     private LinearLayout[] mRowLayouts;
-    private TextView mRow1;
-    private TextView mText1;
+    private TextView[] mRowTexts;
 
     private int xTarget, yTarget, fTarget, selectedRow;
 
@@ -34,25 +34,25 @@ public class ProgramEditorActivity extends MyBaseActivity {
         ButtonInit();
 
         mCurrentRow = (TextView) findViewById(R.id.currentRowText);
-        mRow1 = (TextView) findViewById(R.id.row1);
-        mText1 = (TextView) findViewById(R.id.text1);
+        selectedRow = 0;
 
         mRowLayouts = new LinearLayout[32];
-//        mRowLayouts[1] = (LinearLayout) findViewById(R.id.RowLayout1);
+        mRowTexts = new TextView[32];
         for (int i = 1; i < 33; i++) {
-            int id = getResources().getIdentifier("RowLayout"+i, "id", GetContext().getPackageName());
-            mRowLayouts[i-1] = (LinearLayout)  findViewById(id);
+            int id = getResources().getIdentifier("RowLayout" + i, "id", GetContext().getPackageName());
+            mRowLayouts[i - 1] = (LinearLayout) findViewById(id);
+            id = getResources().getIdentifier("text" + i, "id", GetContext().getPackageName());
+            mRowTexts[i - 1] = (TextView) findViewById(id);
         }
         for (int i = 1; i < 33; i++) {
             final int finalI = i;
-            mRowLayouts[i-1].setOnClickListener(new View.OnClickListener() {
+            mRowLayouts[i - 1].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     SetCurrentRow(finalI);
                 }
             });
         }
-
 
 
     }
@@ -131,10 +131,14 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mRemoveBtn = (ImageButton) findViewById(R.id.buttonRemove);
         mMoveUpBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
         mMoveDownBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
+        mCopyBtn = (ImageButton) findViewById(R.id.buttonCopy);
+
+
         mReferenceBtn = (ImageButton) findViewById(R.id.buttonReference);
         mPowerBtn = (ImageButton) findViewById(R.id.buttonPower);
         mValveBtn = (ImageButton) findViewById(R.id.buttonValve);
-        mCopyBtn = (ImageButton) findViewById(R.id.buttonCopy);
+        mValveOffBtn = (ImageButton) findViewById(R.id.buttonValveStop);
+        mGotoBtn = (ImageButton) findViewById(R.id.buttonGoto);
 
         mMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +147,9 @@ public class ProgramEditorActivity extends MyBaseActivity {
                 startActivity(intent);
             }
         });
+
+
+
 
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,33 +179,58 @@ public class ProgramEditorActivity extends MyBaseActivity {
             }
         });
 
-        mReferenceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        mPowerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        mValveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         mCopyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
+
+
+        mReferenceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow > 0 && selectedRow < 32) {
+                    mRowTexts[selectedRow - 1].setText("$H");
+                    mRowTexts[selectedRow].setText("G92 X3 Y3");
+                }
+            }
+        });
+
+        mPowerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow > 0 && selectedRow < 33)
+                    mRowTexts[selectedRow - 1].setText("");
+            }
+        });
+
+        mValveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow > 0 && selectedRow < 33)
+                    mRowTexts[selectedRow - 1].setText("F2");
+            }
+        });
+
+        mValveOffBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow > 0 && selectedRow < 33)
+                    mRowTexts[selectedRow - 1].setText("F3");
+            }
+        });
+
+        mGotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow > 0 && selectedRow < 33)
+                    mRowTexts[selectedRow - 1].setText(new String("G1 X" + xTarget + " Y" + yTarget + " F" + fTarget));
+            }
+        });
+
+        //F0 led on F1 led off
     }
 
     @Override

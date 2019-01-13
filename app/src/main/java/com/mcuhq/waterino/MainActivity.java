@@ -84,10 +84,10 @@ public class MainActivity extends MyBaseActivity {
             mHandBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mMyApp.mConnectedThread != null) {
+//                    if (mMyApp.mConnectedThread != null) {
                         Intent intent = new Intent(getApplicationContext(), ManualActivity.class);
                         startActivity(intent);
-                    }
+//                    }
 
                 }
             });
@@ -95,10 +95,10 @@ public class MainActivity extends MyBaseActivity {
             mGcodesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mMyApp.mConnectedThread != null) {
+//                    if (mMyApp.mConnectedThread != null) {
                         Intent intent = new Intent(getApplicationContext(), GCodesActivity.class);
                         startActivity(intent);
-                    }
+//                    }
 
                 }
             });
@@ -106,10 +106,10 @@ public class MainActivity extends MyBaseActivity {
             mProgramBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mMyApp.mConnectedThread != null) {
+//                    if (mMyApp.mConnectedThread != null) {
                         Intent intent = new Intent(getApplicationContext(), ProgramEditorActivity.class);
                         startActivity(intent);
-                    }
+//                    }
 
                 }
             });

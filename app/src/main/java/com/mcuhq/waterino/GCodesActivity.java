@@ -65,42 +65,54 @@ public class GCodesActivity extends MyBaseActivity {
         mHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("$H"));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("$H"));
+                }
             }
         });
 
         mPresetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("G92 X3 Y3"));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("G92 X3 Y3"));
+                }
             }
         });
 
         mResetAlBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("$X"));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("$X"));
+                }
             }
         });
 
         mGetStatusBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("$?"));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("$?"));
+                }
             }
         });
 
         mGetParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("$$"));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("$$"));
+                }
             }
         });
 
         mGoToBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMyApp.mConnectedThread.write(new String("G1 X"+xTarget+" Y"+yTarget+" F"+ fTarget));
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.write(new String("G1 X" + xTarget + " Y" + yTarget + " F" + fTarget));
+                }
             }
         });
 
