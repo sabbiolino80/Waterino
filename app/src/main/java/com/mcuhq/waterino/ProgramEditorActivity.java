@@ -1,13 +1,30 @@
 package com.mcuhq.waterino;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.ArrayList;
 
 public class ProgramEditorActivity extends MyBaseActivity {
 
@@ -20,6 +37,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
     private TextView[] mRowTexts;
 
     private int xTarget, yTarget, fTarget, selectedRow;
+    ArrayList<Step> steps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +72,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
             });
         }
 
-
+        parseXML();
     }
 
     private void NumPickerInit() {
@@ -149,8 +167,6 @@ public class ProgramEditorActivity extends MyBaseActivity {
         });
 
 
-
-
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,7 +201,6 @@ public class ProgramEditorActivity extends MyBaseActivity {
 
             }
         });
-
 
 
         mReferenceBtn.setOnClickListener(new View.OnClickListener() {
@@ -246,6 +261,124 @@ public class ProgramEditorActivity extends MyBaseActivity {
     private void SetCurrentRow(int row) {
         selectedRow = row;
         mCurrentRow.setText("row " + selectedRow);
+    }
+
+    private void parseXML() {
+        XmlPullParserFactory parserFactory;
+        try {
+            //parserFactory = XmlPullParserFactory.newInstance();
+            //XmlPullParser parser = parserFactory.newPullParser();
+            //InputStream is = getAssets().open("programs.xml");
+            //String path = getApplicationContext().getDataDir().getAbsolutePath();
+            //InputStream is = new FileInputStream(new File(path + "/res/programs.xml"));
+            Resources res = getResources();
+            XmlResourceParser parser = res.getXml(R.xml.programs);
+            //parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            //parser.setInput(is, null);
+
+            processParsing(parser);
+
+            XmlToLayout();
+
+        } catch (XmlPullParserException e) {
+
+        } catch (IOException e) {
+        }
+    }
+
+    private void XmlToLayout() {
+        for (Step s : steps) {
+            mRowTexts[s.number - 1].setText(s.text);
+        }
+    }
+
+    private void processParsing(XmlResourceParser parser) throws IOException, XmlPullParserException {
+        steps = new ArrayList<>();
+        int eventType = parser.getEventType();
+        Step currentStep = null;
+
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            String eltName = null;
+
+            switch (eventType) {
+                case XmlPullParser.START_TAG:
+                    eltName = parser.getName();
+
+                    if ("step".equals(eltName)) {
+                        currentStep = new Step();
+                        int n = parser.getAttributeCount();
+                        for (int i = 0; i < n; i++) {
+                            String att = parser.getAttributeName(i);
+                            switch (att) {
+                                case "number":
+                                    currentStep.number = Integer.parseInt(parser.getAttributeValue(i));
+                                    break;
+                                case "type":
+                                    currentStep.type = parser.getAttributeValue(i);
+                                    break;
+                                case "text":
+                                    currentStep.text = parser.getAttributeValue(i);
+                                    break;
+                            }
+                        }
+
+                        steps.add(currentStep);
+                    }
+                    break;
+                case XmlPullParser.TEXT:
+
+                    break;
+            }
+
+            eventType = parser.next();
+        }
+
+        //printPlayers(players);
+    }
+
+
+    private void writeoFile()
+    {
+        final String xmlFile = "userData";
+        String userNAme = "username";
+        String password = "password";
+        try {
+            FileOutputStream fos = new  FileOutputStream("userData.xml");
+            FileOutputStream fileos= getApplicationContext().openFileOutput(xmlFile, getApplicationContext().MODE_PRIVATE);
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            xmlSerializer.setOutput(writer);
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.startTag(null, "userData");
+            xmlSerializer.startTag(null, "userName");
+            xmlSerializer.text("...");
+            xmlSerializer.endTag(null, "userName");
+            xmlSerializer.startTag(null,"password");
+            xmlSerializer.text("...");
+            xmlSerializer.endTag(null, "password");
+            xmlSerializer.endTag(null, "userData");
+            xmlSerializer.endDocument();
+            xmlSerializer.flush();
+            String dataWrite = writer.toString();
+            fileos.write(dataWrite.getBytes());
+            fileos.close();
+        }
+        catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
