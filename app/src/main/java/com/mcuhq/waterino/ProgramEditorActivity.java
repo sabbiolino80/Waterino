@@ -6,7 +6,6 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -17,18 +16,15 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
 public class ProgramEditorActivity extends MyBaseActivity {
 
-    private ImageButton mMainBtn, mAddBtn, mRemoveBtn, mMoveUpBtn, mMoveDownBtn, mCopyBtn;
+    private ImageButton mMainBtn, mFlashBtn, mExecuteBtn, mMoveUpBtn, mMoveDownBtn, mCopyBtn;
     private ImageButton mReferenceBtn, mPowerBtn, mValveBtn, mValveOffBtn, mGotoBtn;
     private NumberPicker mXNum, mYNum, mFNum;
     private TextView mXVal, mYVal, mFVal, mCurrentRow;
@@ -145,8 +141,8 @@ public class ProgramEditorActivity extends MyBaseActivity {
 
     private void ButtonInit() {
         mMainBtn = (ImageButton) findViewById(R.id.buttonMain);
-        mAddBtn = (ImageButton) findViewById(R.id.buttonAdd);
-        mRemoveBtn = (ImageButton) findViewById(R.id.buttonRemove);
+        mFlashBtn = (ImageButton) findViewById(R.id.buttonFlash);
+        mExecuteBtn = (ImageButton) findViewById(R.id.buttonExecute);
         mMoveUpBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
         mMoveDownBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
         mCopyBtn = (ImageButton) findViewById(R.id.buttonCopy);
@@ -167,14 +163,14 @@ public class ProgramEditorActivity extends MyBaseActivity {
         });
 
 
-        mAddBtn.setOnClickListener(new View.OnClickListener() {
+        mFlashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
 
-        mRemoveBtn.setOnClickListener(new View.OnClickListener() {
+        mExecuteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

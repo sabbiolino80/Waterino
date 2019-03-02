@@ -88,20 +88,21 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/buttonAdd"
+                    android:id="@+id/buttonFlash"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_add" />
+                    android:src="@drawable/ic_flash_on" />
 
                 <ImageButton
-                    android:id="@+id/buttonRemove"
+                    android:id="@+id/buttonExecute"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_remove" />
+                    android:src="@android:drawable/ic_media_play"
+                    android:tint="@color/colorLightBlue" />
 
                 <ImageButton
                     android:id="@+id/buttonCopy"
