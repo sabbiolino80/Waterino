@@ -166,7 +166,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mFlashBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FlashProgram();
             }
         });
 
@@ -333,14 +333,13 @@ public class ProgramEditorActivity extends MyBaseActivity {
     }
 
 
-    private void writeoFile()
-    {
+    private void writeToFile() {
         final String xmlFile = "userData";
-        String userNAme = "username";
+        String userName = "username";
         String password = "password";
         try {
-            FileOutputStream fos = new  FileOutputStream("userData.xml");
-            FileOutputStream fileos= getApplicationContext().openFileOutput(xmlFile, getApplicationContext().MODE_PRIVATE);
+            FileOutputStream fos = new FileOutputStream("userData.xml");
+            FileOutputStream fileos = getApplicationContext().openFileOutput(xmlFile, getApplicationContext().MODE_PRIVATE);
             XmlSerializer xmlSerializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
             xmlSerializer.setOutput(writer);
@@ -349,7 +348,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
             xmlSerializer.startTag(null, "userName");
             xmlSerializer.text("...");
             xmlSerializer.endTag(null, "userName");
-            xmlSerializer.startTag(null,"password");
+            xmlSerializer.startTag(null, "password");
             xmlSerializer.text("...");
             xmlSerializer.endTag(null, "password");
             xmlSerializer.endTag(null, "userData");
@@ -358,22 +357,30 @@ public class ProgramEditorActivity extends MyBaseActivity {
             String dataWrite = writer.toString();
             fileos.write(dataWrite.getBytes());
             fileos.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        catch (IllegalArgumentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    }
+
+
+    private void FlashProgram() {
+        int num = 0;
+        for (int i = 0; i < 33; i++) {
+            if (mRowTexts[i].getText() != "") {
+                //$Nn=...
+                mMyApp.mConnectedThread.write(new String("$N"+num+"="+mRowTexts[i].getText()));
+                num++;
+            }
         }
     }
 
