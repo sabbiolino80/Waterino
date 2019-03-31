@@ -3,7 +3,6 @@ package com.mcuhq.waterino;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -66,7 +65,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("$H"));
+                    mMyApp.mConnectedThread.writeLine(new String("$H"));
                 }
             }
         });
@@ -75,7 +74,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("G92 X3 Y3"));
+                    mMyApp.mConnectedThread.writeLine(new String("G92 X3 Y3"));
                 }
             }
         });
@@ -84,7 +83,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("$X"));
+                    mMyApp.mConnectedThread.writeLine(new String("$X"));
                 }
             }
         });
@@ -93,7 +92,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("$?"));
+                    mMyApp.mConnectedThread.writeLine(new String("$?"));
                 }
             }
         });
@@ -102,7 +101,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("$$"));
+                    mMyApp.mConnectedThread.writeLine(new String("$$"));
                 }
             }
         });
@@ -111,7 +110,7 @@ public class GCodesActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
-                    mMyApp.mConnectedThread.write(new String("G1 X" + xTarget + " Y" + yTarget + " F" + fTarget));
+                    mMyApp.mConnectedThread.writeLine(new String("G1 X" + xTarget + " Y" + yTarget + " F" + fTarget));
                 }
             }
         });

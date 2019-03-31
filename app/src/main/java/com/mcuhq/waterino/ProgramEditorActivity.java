@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 public class ProgramEditorActivity extends MyBaseActivity {
 
-    private ImageButton mMainBtn, mFlashBtn, mExecuteBtn, mMoveUpBtn, mMoveDownBtn, mCopyBtn;
+    private ImageButton mMainBtn, mFlashBtn, mRunBtn, mDeleteStepBtn, mSaveBtn, mExecuteStepBtn;
     private ImageButton mReferenceBtn, mPowerBtn, mValveBtn, mValveOffBtn, mGotoBtn;
     private NumberPicker mXNum, mYNum, mFNum;
     private TextView mXVal, mYVal, mFVal, mCurrentRow;
@@ -142,10 +143,10 @@ public class ProgramEditorActivity extends MyBaseActivity {
     private void ButtonInit() {
         mMainBtn = (ImageButton) findViewById(R.id.buttonMain);
         mFlashBtn = (ImageButton) findViewById(R.id.buttonFlash);
-        mExecuteBtn = (ImageButton) findViewById(R.id.buttonExecute);
-        mMoveUpBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
-        mMoveDownBtn = (ImageButton) findViewById(R.id.buttonMoveUp);
-        mCopyBtn = (ImageButton) findViewById(R.id.buttonCopy);
+        mRunBtn = (ImageButton) findViewById(R.id.buttonRun);
+        mDeleteStepBtn = (ImageButton) findViewById(R.id.buttonDelete);
+        mSaveBtn = (ImageButton) findViewById(R.id.buttonSave);
+        mExecuteStepBtn = (ImageButton) findViewById(R.id.buttonExecute);
 
 
         mReferenceBtn = (ImageButton) findViewById(R.id.buttonReference);
@@ -170,31 +171,33 @@ public class ProgramEditorActivity extends MyBaseActivity {
             }
         });
 
-        mExecuteBtn.setOnClickListener(new View.OnClickListener() {
+        mRunBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mMyApp.mConnectedThread.writeLine("F6");
             }
         });
 
-        mMoveUpBtn.setOnClickListener(new View.OnClickListener() {
+        mDeleteStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (selectedRow > 0 && selectedRow < 33)
+                    mRowTexts[selectedRow - 1].setText("");
             }
         });
 
-        mMoveDownBtn.setOnClickListener(new View.OnClickListener() {
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//TODO writeLine xml file
             }
         });
 
-        mCopyBtn.setOnClickListener(new View.OnClickListener() {
+        mExecuteStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (selectedRow > 0 && selectedRow < 33)
+                    mMyApp.mConnectedThread.writeLine((String) mRowTexts[selectedRow - 1].getText());
             }
         });
 
@@ -202,6 +205,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mReferenceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 32 because it takes two steps ;)
                 if (selectedRow > 0 && selectedRow < 32) {
                     mRowTexts[selectedRow - 1].setText("$H");
                     mRowTexts[selectedRow].setText("G92 X3 Y3");
@@ -373,15 +377,31 @@ public class ProgramEditorActivity extends MyBaseActivity {
     }
 
 
-    private void FlashProgram() {
-        int num = 0;
-        for (int i = 0; i < 33; i++) {
-            if (mRowTexts[i].getText() != "") {
+    Handler timerHandler = new Handler();
+    int lineNum = 0;
+    int index = 0;
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            if (mRowTexts[index].getText() != "") {
                 //$Nn=...
-                mMyApp.mConnectedThread.write(new String("$N"+num+"="+mRowTexts[i].getText()));
-                num++;
+                mMyApp.mConnectedThread.writeLine(new String("$N" + lineNum + "=" + mRowTexts[index].getText()));
+                lineNum++;
             }
+            index++;
+            if (index < 33)
+                timerHandler.postDelayed(this, 100);
+            else
+                timerHandler.removeCallbacks(timerRunnable);
         }
+    };
+
+    private void FlashProgram() {
+        lineNum = 0;
+        index = 0;
+        timerHandler.postDelayed(timerRunnable, 0);
     }
+
 
 }
