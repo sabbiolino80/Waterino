@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class GCodesActivity extends MyBaseActivity {
 
-    private Button mHomeBtn, mPresetBtn, mResetAlBtn, mGetStatusBtn, mGetParams, mGoToBtn ;
+    private Button mHomeBtn, mPresetBtn, mResetAlBtn, mGetStatusBtn, mGetParams, mGetLines, mGoToBtn ;
     private ImageButton mMainBtn;
     private NumberPicker mXNum, mYNum, mFNum;
     private TextView mXVal, mYVal, mFVal;
@@ -25,21 +25,22 @@ public class GCodesActivity extends MyBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gcode_cmds);
 
-        mHomeBtn = (Button) findViewById(R.id.buttonHome);
-        mPresetBtn = (Button) findViewById(R.id.buttonPreset);
-        mResetAlBtn = (Button) findViewById(R.id.buttonResetAl);
-        mGetStatusBtn = (Button) findViewById(R.id.buttonGetStatus);
-        mGetParams = (Button) findViewById(R.id.buttonGetParams);
-        mGoToBtn = (Button) findViewById(R.id.buttonGoTo);
-        mMainBtn = (ImageButton) findViewById(R.id.buttonMain);
-        mXNum = (NumberPicker) findViewById(R.id.npX);
-        mYNum = (NumberPicker) findViewById(R.id.npY);
-        mFNum = (NumberPicker) findViewById(R.id.npF);
-        mXVal = (TextView) findViewById(R.id.XValText);
-        mYVal = (TextView) findViewById(R.id.YValText);
-        mFVal = (TextView) findViewById(R.id.FValText);
-        mBluetoothStatus = (TextView) findViewById(R.id.bluetoothStatus);
-        mReadBuffer = (TextView) findViewById(R.id.readBuffer);
+        mHomeBtn = findViewById(R.id.buttonHome);
+        mPresetBtn = findViewById(R.id.buttonPreset);
+        mResetAlBtn = findViewById(R.id.buttonResetAl);
+        mGetStatusBtn = findViewById(R.id.buttonGetStatus);
+        mGetParams = findViewById(R.id.buttonGetParams);
+        mGetLines = findViewById(R.id.buttonGetLines);
+        mGoToBtn = findViewById(R.id.buttonGoTo);
+        mMainBtn = findViewById(R.id.buttonMain);
+        mXNum = findViewById(R.id.npX);
+        mYNum = findViewById(R.id.npY);
+        mFNum = findViewById(R.id.npF);
+        mXVal = findViewById(R.id.XValText);
+        mYVal = findViewById(R.id.YValText);
+        mFVal = findViewById(R.id.FValText);
+        mBluetoothStatus = findViewById(R.id.bluetoothStatus);
+        mReadBuffer = findViewById(R.id.readBuffer);
 
         mXNum.setMinValue(1);
         mXNum.setMaxValue(357);
@@ -102,6 +103,15 @@ public class GCodesActivity extends MyBaseActivity {
             public void onClick(View v) {
                 if (mMyApp.mConnectedThread != null) {
                     mMyApp.mConnectedThread.writeLine(new String("$$"));
+                }
+            }
+        });
+
+        mGetLines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMyApp.mConnectedThread != null) {
+                    mMyApp.mConnectedThread.writeLine(new String("$N"));
                 }
             }
         });

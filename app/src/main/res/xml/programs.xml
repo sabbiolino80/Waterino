@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<program>
-		<step number="1" type="motorson" text="F4"/>
-		<step number="2" type="home" text="$H"/>
-		<step number="3" type="preset" text="G92 X3 Y3"/>
-		<step number="4" type="goto" text="G1 X10 Y35 F1000"/>
-		<step number="5" type="valveon" text="F2"/>
+		<step number="1" type="home" text="$H"/>
+		<step number="2" type="preset" text="G92 X3 Y3"/>
+		<step number="3" type="goto" text="G1 X10 Y35 F1000"/>
+		<step number="4" type="valveon" text="F2"/>
+		<step number="5" type="loopstart" text="F7"/>
 		<step number="6" type="goto" text="G1 X10 Y50 F50"/>
 		<step number="7" type="goto" text="G1 X100 Y50 F50"/>
 		<step number="8" type="goto" text="G1 X100 Y35 F50"/>
 		<step number="9" type="goto" text="G1 X10 Y35 F50"/>
-		<step number="10" type="valveoff" text="F3"/>
-		<step number="11" type="motorsoff" text="F5"/>
+		<step number="10" type="loopstop" text="F8"/>
+		<step number="30" type="valveoff" text="F3"/>
 	</program>

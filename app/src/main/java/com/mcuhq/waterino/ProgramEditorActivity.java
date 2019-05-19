@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class ProgramEditorActivity extends MyBaseActivity {
 
+    static final int MAX_ROW = 30;
+
     private ImageButton mMainBtn, mFlashBtn, mRunBtn, mDeleteStepBtn, mSaveBtn, mExecuteStepBtn;
     private ImageButton mReferenceBtn, mPowerBtn, mValveBtn, mValveOffBtn, mGotoBtn;
     private NumberPicker mXNum, mYNum, mFNum;
@@ -43,23 +45,23 @@ public class ProgramEditorActivity extends MyBaseActivity {
 
         NumPickerInit();
 
-        mBluetoothStatus = (TextView) findViewById(R.id.bluetoothStatus);
-        mReadBuffer = (TextView) findViewById(R.id.readBuffer);
+        mBluetoothStatus = findViewById(R.id.bluetoothStatus);
+        mReadBuffer = findViewById(R.id.readBuffer);
 
         ButtonInit();
 
-        mCurrentRow = (TextView) findViewById(R.id.currentRowText);
+        mCurrentRow = findViewById(R.id.currentRowText);
         selectedRow = 0;
 
-        mRowLayouts = new LinearLayout[32];
-        mRowTexts = new TextView[32];
-        for (int i = 1; i < 33; i++) {
+        mRowLayouts = new LinearLayout[MAX_ROW];
+        mRowTexts = new TextView[MAX_ROW];
+        for (int i = 1; i <= MAX_ROW; i++) {
             int id = getResources().getIdentifier("RowLayout" + i, "id", GetContext().getPackageName());
-            mRowLayouts[i - 1] = (LinearLayout) findViewById(id);
+            mRowLayouts[i - 1] = findViewById(id);
             id = getResources().getIdentifier("text" + i, "id", GetContext().getPackageName());
-            mRowTexts[i - 1] = (TextView) findViewById(id);
+            mRowTexts[i - 1] = findViewById(id);
         }
-        for (int i = 1; i < 33; i++) {
+        for (int i = 1; i <= MAX_ROW; i++) {
             final int finalI = i;
             mRowLayouts[i - 1].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,12 +75,12 @@ public class ProgramEditorActivity extends MyBaseActivity {
     }
 
     private void NumPickerInit() {
-        mXNum = (NumberPicker) findViewById(R.id.npX);
-        mYNum = (NumberPicker) findViewById(R.id.npY);
-        mFNum = (NumberPicker) findViewById(R.id.npF);
-        mXVal = (TextView) findViewById(R.id.XValText);
-        mYVal = (TextView) findViewById(R.id.YValText);
-        mFVal = (TextView) findViewById(R.id.FValText);
+        mXNum = findViewById(R.id.npX);
+        mYNum = findViewById(R.id.npY);
+        mFNum = findViewById(R.id.npF);
+        mXVal = findViewById(R.id.XValText);
+        mYVal = findViewById(R.id.YValText);
+        mFVal = findViewById(R.id.FValText);
 
         mXNum.setMinValue(1);
         mXNum.setMaxValue(357);
@@ -141,19 +143,19 @@ public class ProgramEditorActivity extends MyBaseActivity {
     }
 
     private void ButtonInit() {
-        mMainBtn = (ImageButton) findViewById(R.id.buttonMain);
-        mFlashBtn = (ImageButton) findViewById(R.id.buttonFlash);
-        mRunBtn = (ImageButton) findViewById(R.id.buttonRun);
-        mDeleteStepBtn = (ImageButton) findViewById(R.id.buttonDelete);
-        mSaveBtn = (ImageButton) findViewById(R.id.buttonSave);
-        mExecuteStepBtn = (ImageButton) findViewById(R.id.buttonExecute);
+        mMainBtn = findViewById(R.id.buttonMain);
+        mFlashBtn = findViewById(R.id.buttonFlash);
+        mRunBtn = findViewById(R.id.buttonRun);
+        mDeleteStepBtn = findViewById(R.id.buttonDelete);
+        mSaveBtn = findViewById(R.id.buttonSave);
+        mExecuteStepBtn = findViewById(R.id.buttonExecute);
 
 
-        mReferenceBtn = (ImageButton) findViewById(R.id.buttonReference);
-        mPowerBtn = (ImageButton) findViewById(R.id.buttonPower);
-        mValveBtn = (ImageButton) findViewById(R.id.buttonValve);
-        mValveOffBtn = (ImageButton) findViewById(R.id.buttonValveStop);
-        mGotoBtn = (ImageButton) findViewById(R.id.buttonGoto);
+        mReferenceBtn = findViewById(R.id.buttonReference);
+        mPowerBtn = findViewById(R.id.buttonPower);
+        mValveBtn = findViewById(R.id.buttonValve);
+        mValveOffBtn = findViewById(R.id.buttonValveStop);
+        mGotoBtn = findViewById(R.id.buttonGoto);
 
         mMainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +183,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mDeleteStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 2 && selectedRow < MAX_ROW)
                     mRowTexts[selectedRow - 1].setText("");
             }
         });
@@ -196,7 +198,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mExecuteStepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 0 && selectedRow <= MAX_ROW)
                     mMyApp.mConnectedThread.writeLine((String) mRowTexts[selectedRow - 1].getText());
             }
         });
@@ -206,7 +208,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 // 32 because it takes two steps ;)
-                if (selectedRow > 0 && selectedRow < 32) {
+                if (selectedRow > 0 && selectedRow < MAX_ROW - 1) {
                     mRowTexts[selectedRow - 1].setText("$H");
                     mRowTexts[selectedRow].setText("G92 X3 Y3");
                 }
@@ -216,7 +218,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mPowerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 2 && selectedRow < MAX_ROW)
                     mRowTexts[selectedRow - 1].setText("");
             }
         });
@@ -224,7 +226,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mValveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 2 && selectedRow < MAX_ROW)
                     mRowTexts[selectedRow - 1].setText("F2");
             }
         });
@@ -232,7 +234,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mValveOffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 2 && selectedRow < MAX_ROW)
                     mRowTexts[selectedRow - 1].setText("F3");
             }
         });
@@ -240,7 +242,7 @@ public class ProgramEditorActivity extends MyBaseActivity {
         mGotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectedRow > 0 && selectedRow < 33)
+                if (selectedRow > 2 && selectedRow < MAX_ROW)
                     mRowTexts[selectedRow - 1].setText(new String("G1 X" + xTarget + " Y" + yTarget + " F" + fTarget));
             }
         });
@@ -378,19 +380,19 @@ public class ProgramEditorActivity extends MyBaseActivity {
 
 
     Handler timerHandler = new Handler();
-    int lineNum = 0;
+    //int lineNum = 0;
     int index = 0;
     Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
-            if (mRowTexts[index].getText() != "") {
+            //if (mRowTexts[index].getText() != "") {
                 //$Nn=...
-                mMyApp.mConnectedThread.writeLine(new String("$N" + lineNum + "=" + mRowTexts[index].getText()));
-                lineNum++;
-            }
+                mMyApp.mConnectedThread.writeLine(new String("$N" + index + "=" + mRowTexts[index].getText()));
+                //lineNum++;
+            //}
             index++;
-            if (index < 33)
+            if (index < MAX_ROW)
                 timerHandler.postDelayed(this, 100);
             else
                 timerHandler.removeCallbacks(timerRunnable);
@@ -398,9 +400,10 @@ public class ProgramEditorActivity extends MyBaseActivity {
     };
 
     private void FlashProgram() {
-        lineNum = 0;
+        //lineNum = 0;
         index = 0;
-        timerHandler.postDelayed(timerRunnable, 0);
+        mMyApp.mConnectedThread.writeLine(new String("$X"));
+        timerHandler.postDelayed(timerRunnable, 1000);
     }
 
 

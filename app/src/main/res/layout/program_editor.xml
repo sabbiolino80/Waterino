@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -110,14 +111,6 @@
                 android:tint="@color/colorLightBlue" />
 
             <ImageButton
-                android:id="@+id/buttonReference"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_home" />
-
-            <ImageButton
                 android:id="@+id/buttonValve"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -135,12 +128,22 @@
                 android:tint="@color/colorLightBlue" />
 
             <ImageButton
+                android:id="@+id/buttonReference"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_home"
+                tools:visibility="invisible" />
+
+            <ImageButton
                 android:id="@+id/buttonPower"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_power_settings_new" />
+                android:src="@drawable/ic_power_settings_new"
+                tools:visibility="invisible" />
         </LinearLayout>
 
         <TextView
@@ -824,7 +827,7 @@
                         android:text="" />
                 </LinearLayout>
 
-                <LinearLayout
+<!--                <LinearLayout
                     android:id="@+id/RowLayout31"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -866,7 +869,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="" />
-                </LinearLayout>
+                </LinearLayout>-->
 
             </LinearLayout>
         </ScrollView>
@@ -890,7 +893,7 @@
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:longClickable="true"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:theme="@style/AppTheme" />
 
             <TextView
